@@ -1,0 +1,36 @@
+{
+    "AWSEBDockerrunVersion": 2, 
+    "containerDefinitions": [
+        {
+            "name": "client",
+            "image": "frankbruno/multi-client",
+            "hostname": "client",
+            "essential": false
+        },
+        {
+            "name": "server",
+            "image": "frankbruno/multi-server",
+            "hostname": "api",
+            "essential": false
+        },
+        {
+            "name": "worker",
+            "image": "frankbruno/multi-worker",
+            "hostname": "worker",
+            "essential": false
+        },
+        {
+            "name": "nginx",
+            "image": "frankbruno/multi-nginx",
+            "hostname": "nginx",
+            "essential": true,
+            "portMappings": [
+                {
+                    "hostPort": 80,
+                    "containerPort": 80
+                }
+            ], 
+            "links": ["client", "server"]
+        }
+    ]
+}
